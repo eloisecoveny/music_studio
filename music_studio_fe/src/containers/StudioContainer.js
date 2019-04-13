@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Piano from "../components/Piano"
+import Piano from "../components/piano/Piano"
 
 class StudioContainer extends Component {
   render(){
