@@ -14,14 +14,14 @@ export default class Login extends Component{
       
         this.setState({ isLoading: true });
       
-        try {
-          await Auth.signIn(this.state.password);
-          this.props.userHasAuthenticated(true);
-          this.props.history.push("/");
-        } catch (e) {
-          alert(e.message);
-          this.setState({ isLoading: false });
-        }
+        // try {
+        //   await Auth.signIn(this.state.password);
+        //   this.props.userHasAuthenticated(true);
+        //   this.props.history.push("/");
+        // } catch (e) {
+        //   alert(e.message);
+        //   this.setState({ isLoading: false });
+        // }
       }
       
 }
