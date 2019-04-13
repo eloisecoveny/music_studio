@@ -43,9 +43,22 @@ public class Project {
         this.name = name;
         this.users = new ArrayList<User>();
         this.addUser(user);
+        this.tags = new ArrayList<Tag>();
     }
 
     public Project() {
+    }
+
+    public void addTag(Tag tag){
+        this.tags.add(tag);
+    }
+
+    public List<Tag> getTags() {
+        return tags;
+    }
+
+    public void setTags(List<Tag> tags) {
+        this.tags = tags;
     }
 
     public void addUser(User user){

@@ -2,9 +2,11 @@ package com.codeclan.example.music_studio_be.components;
 
 import com.codeclan.example.music_studio_be.models.Project;
 import com.codeclan.example.music_studio_be.models.Sequence;
+import com.codeclan.example.music_studio_be.models.Tag;
 import com.codeclan.example.music_studio_be.models.User;
 import com.codeclan.example.music_studio_be.repositories.ProjectRepository;
 import com.codeclan.example.music_studio_be.repositories.SequenceRepository;
+import com.codeclan.example.music_studio_be.repositories.TagRepository;
 import com.codeclan.example.music_studio_be.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
@@ -22,6 +24,9 @@ public class DataLoader implements ApplicationRunner {
 
     @Autowired
     SequenceRepository sequenceRepository;
+
+    @Autowired
+    TagRepository tagRepository;
 
     public DataLoader() {
     }
@@ -54,6 +59,11 @@ public class DataLoader implements ApplicationRunner {
 
         Sequence sequence3 = new Sequence("Melody", project3, user3);
         sequenceRepository.save(sequence3);
+
+        Tag jazz = new Tag("jazz");
+        tagRepository.save(jazz);
+        project1.addTag(jazz);
+        projectRepository.save(project1);
     }
 
 }
