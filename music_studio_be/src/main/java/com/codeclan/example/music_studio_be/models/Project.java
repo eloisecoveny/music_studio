@@ -30,6 +30,15 @@ public class Project {
     @OneToMany(mappedBy = "project", fetch = FetchType.LAZY)
     private List<Sequence> sequences;
 
+    @JsonIgnoreProperties("projects")
+    @ManyToMany
+    @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
+    @JoinTable(
+            joinColumns = {@JoinColumn(name = "project_id", nullable = false, updatable = false)},
+            inverseJoinColumns = {@JoinColumn(name = "tag_id", nullable = false, updatable = false)}
+    )
+    private List<Tag> tags;
+
     public Project(String name, User user){
         this.name = name;
         this.users = new ArrayList<User>();
