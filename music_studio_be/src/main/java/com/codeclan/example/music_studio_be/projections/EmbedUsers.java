@@ -8,7 +8,7 @@ import java.util.List;
 
 @Projection(name = "embedUsers", types = User.class)
 public interface EmbedUsers {
-    long getId();
+    Long getId();
     String getUsername();
     List<Project> getProjects();
 }
