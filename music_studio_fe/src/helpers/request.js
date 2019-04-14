@@ -1,4 +1,4 @@
-class React {
+class Request {
 
   get(url){
     return fetch(url)
