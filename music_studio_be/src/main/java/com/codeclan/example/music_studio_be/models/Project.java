@@ -22,6 +22,7 @@ public class Project {
     @ManyToMany
     @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
     @JoinTable(
+            name = "users_projects",
             joinColumns = {@JoinColumn(name = "project_id", nullable = false, updatable = false)},
             inverseJoinColumns = {@JoinColumn(name = "user_id", nullable = false, updatable = false)}
     )
@@ -34,6 +35,7 @@ public class Project {
     @ManyToMany
     @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
     @JoinTable(
+            name = "projects_tags",
             joinColumns = {@JoinColumn(name = "project_id", nullable = false, updatable = false)},
             inverseJoinColumns = {@JoinColumn(name = "tag_id", nullable = false, updatable = false)}
     )

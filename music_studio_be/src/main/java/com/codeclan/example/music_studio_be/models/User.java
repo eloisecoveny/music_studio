@@ -21,7 +21,7 @@ public class User {
     @JsonIgnoreProperties("users")
     @ManyToMany
     @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
-    @JoinTable(
+    @JoinTable(name = "users_projects",
             joinColumns = {@JoinColumn(name = "user_id", nullable = false, updatable = false)},
             inverseJoinColumns = {@JoinColumn(name = "project_id", nullable = false, updatable = false)}
     )
