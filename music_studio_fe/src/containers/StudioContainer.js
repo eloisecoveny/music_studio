@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Piano from "../components/piano/Piano"
 import Request from "../helpers/request.js"
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
-import NavBar from "../NavBar"
+import NavBar from "../components/nav/NavBar"
 
 class StudioContainer extends Component {
   constructor(props){
@@ -11,8 +11,10 @@ class StudioContainer extends Component {
       users: [],
       currentUser: null,
       projects: [],
-      currentProject: null
+      currentProject: null,
+      foundUser: null
     }
+    this.handleSelectedUser = this.handleSelectedUser.bind(this)
   }
 
   componentDidMount(){
@@ -21,11 +23,15 @@ class StudioContainer extends Component {
     .then(data => this.setState({ users: data._embedded.users }))
   }
 
+  handleSelectedUser(user){
+    this.setState({ foundUser: user })
+  }
+
   render(){
     return (
       <div>
         <Router>
-        <NavBar/>
+        <NavBar selectedUser={ this.handleSelectedUser } users={ this.state.users }/>
         <Switch>
         <Route exact path="/home" render={ (props) => {
         return null

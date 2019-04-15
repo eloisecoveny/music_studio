@@ -1,7 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom"
+import UserSearch from "./UserSearch"
 
-const NavBar = () => {
+const NavBar = (props) => {
   return(
     <div className="nav-bar">
       <h3>Sound Studio</h3>
@@ -17,7 +18,7 @@ const NavBar = () => {
         </li>
       </ul>
 
-      <input type="text" placeholder="Search users"/>
+      <UserSearch selectedUser={ props.selectedUser }users={ props.users }></UserSearch>
 
       <select id="">
         <option value="tag">Project Tag</option>
