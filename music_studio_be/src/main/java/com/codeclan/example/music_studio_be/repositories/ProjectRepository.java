@@ -10,7 +10,8 @@ import java.util.List;
 @RepositoryRestResource(excerptProjection = EmbedProjects.class)
 public interface ProjectRepository extends JpaRepository<Project, Long> {
 
-    List<Project> findProjectsByUsersId(Long id);
+    List<Project> findProjectByUsersId(Long id);
 
-    List<Project> findProjectsByTagsId(Long id);
+    List<Project> findProjectByTagsId(Long id);
+
 }

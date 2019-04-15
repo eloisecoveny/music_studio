@@ -38,10 +38,16 @@ public class MusicStudioBeApplicationTests {
 		assertEquals(3, found.size());
 	}
 
-//	@Test
-//	public void canGetUserById(){
-//		User found = userRepository.findById(1L);
-//		assertEquals("eloisec", found.getUsername());
-//	}
+	@Test
+	public void canGetAllProjectsByTagId(){
+		List<Project> found = projectRepository.findProjectByTagsId(1L);
+		assertEquals(1, found.size());
+	}
+
+	@Test
+	public void canGetAllProjectsByUserId(){
+		List<Project> found = projectRepository.findProjectByUsersId(1L);
+		assertEquals(1, found.size());
+	}
 
 }

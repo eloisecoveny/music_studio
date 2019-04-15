@@ -53,16 +53,16 @@ public class Project {
         this.tags.add(tag);
     }
 
+    public void addUser(User user){
+        this.users.add(user);
+    }
+
     public List<Tag> getTags() {
         return tags;
     }
 
     public void setTags(List<Tag> tags) {
         this.tags = tags;
-    }
-
-    public void addUser(User user){
-        this.users.add(user);
     }
 
     public Long getId() {
