@@ -1,22 +1,110 @@
 import React from "react";
 import PianoKey from "./PianoKey"
+import Tone from "tone"
 import "./Piano.css"
 
 
-const Piano = (props) => {
+class Piano extends React.Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      blob: null,
+      recording: false,
+      audio: null,
+      synth: null,
+      context: null,
+      destination: null,
+      recorder: null
+    }
+    this.handlePlayNote = this.handlePlayNote.bind(this)
+    this.playNote = this.playNote.bind(this)
+    this.startRecord = this.startRecord.bind(this)
+    this.stopRecord = this.stopRecord.bind(this)
+  }
 
-  const notes = [{note: "middle_a", input: "a"}, {note: "mid_a_sharp", input: "1"}, {note: "middle_b", input: "s"}, {note: "middle_c", input: "q"}, {note: "mid_c_sharp", input: "2"}, {note: "middle_d", input: "w"}, {note: "mid_d_sharp", input: "3"}, {note: "middle_e", input: "e"}, {note: "middle_f", input: "r"}, {note: "mid_f_sharp", input: "4"}, {note: "middle_g", input: "t"}, {note: "mid_g_sharp", input: "5"}, {note: "high_a", input: "y"}, {note: "high_a_sharp", input: "6"}, {note: "high_b", input: "u"}, {note: "high_c", input: "i"}, {note: "high_c_sharp", input: "7"}, {note: "high_d", input: "o"}, {note: "high_d_sharp", input: "8"}, {note: "high_e", input: "p"}, {note: "high_f_sharp", input: "9"}, {note: "high_f", input: "k"}, {note: "high_g_sharp", input: "0"}, {note: "high_g", input: "l"}]
+  componentDidMount(){
+    window.addEventListener('keydown', this.playNote);
+  }
 
-  const keys = notes.map((end_link, index) => {
-     return <PianoKey className={end_link.note} dataKey={ end_link.input } key={ index } sound={require( `../../sounds/${props.sound}/${end_link.note}.mp3` )}></PianoKey>
-  })
+  startRecord(){
+    this.state.recorder.start()
+  }
 
-  return (
-    <div className="piano">
-      <h1>I am piano!</h1>
-      { keys }
-    </div>
-  )
+  stopRecord(){
+    this.state.recorder.stop();
+  }
+
+
+  handlePlayNote(note){
+    if (!this.state.recorder){
+      const audio = document.querySelector("audio")
+      const synth = new Tone.Synth();
+      const context = Tone.context;
+      const destination = context.createMediaStreamDestination();
+      const recorder = new MediaRecorder(destination.stream)
+      this.setState({ audio: audio, synth: synth, context: context, destination: destination, recorder: recorder })
+    } else if (this.state.recorder){
+      this.state.synth.connect(this.state.destination)
+      this.state.synth.toMaster();
+
+      const chunks = [];
+
+
+
+
+      this.state.synth.triggerAttack(note)
+      window.addEventListener("keyup", () => {
+        this.state.synth.triggerRelease()
+      })
+
+      const recorder = this.state.recorder
+
+      recorder.ondataavailable = evt => chunks.push(evt.data);
+      recorder.onstop = evt => {
+        let audio = this.state.audio
+        let blob = new Blob(chunks, {type: 'audio/ogg; codecs=opus'})
+        let audioUrl = URL.createObjectURL(blob);
+        audio.src = audioUrl
+      }
+    }
+
+
+
+  }
+
+  playNote(e){
+    const key = document.querySelector(`div[data-key="${e.key}"]`)
+    if (key){
+      this.handlePlayNote(key.getAttribute("note"));
+
+    }
+
+  }
+
+  render(){
+
+
+
+    const notes = [{note: "A4", input: "a"}, {note: "A7", input: "1"}, {note: "B4", input: "s"}, {note: "C4", input: "q"}, {note: "C7", input: "2"}, {note: "D4", input: "w"}, {note: "D7", input: "3"}, {note: "E4", input: "e"}, {note: "F4", input: "r"}, {note: "F7", input: "4"}, {note: "G4", input: "t"}, {note: "G7", input: "5"}, {note: "A5", input: "y"}, {note: "A8", input: "6"}, {note: "B5", input: "u"}, {note: "C5", input: "i"}, {note: "C8", input: "7"}, {note: "D5", input: "o"}, {note: "D8", input: "8"}, {note: "E5", input: "p"}, {note: "F8", input: "9"}, {note: "F5", input: "k"}, {note: "G8", input: "0"}, {note: "G5", input: "l"}]
+
+    const keys = notes.map((note, index) => {
+       return <PianoKey handlePlayNote={ this.handlePlayNote } note={ note.note } input={ note.input } key={ index }></PianoKey>
+    })
+
+    return (
+      <div className="piano">
+        <h1>I am piano!</h1>
+        <button onClick={ this.startRecord }>start</button>
+        <button onClick={ this.stopRecord }>stop</button>
+        { keys }
+        <audio controls></audio>
+      </div>
+    )
+
+  }
+
+
+
 }
 
 export default Piano
