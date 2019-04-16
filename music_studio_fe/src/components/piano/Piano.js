@@ -1,6 +1,7 @@
 import React from "react";
 import PianoKey from "./PianoKey"
 import Tone from "tone"
+import Request from "../../helpers/request"
 import "./Piano.css"
 
 
@@ -20,6 +21,7 @@ class Piano extends React.Component {
     this.playNote = this.playNote.bind(this)
     this.startRecord = this.startRecord.bind(this)
     this.stopRecord = this.stopRecord.bind(this)
+    this.saveAudio = this.saveAudio.bind(this)
   }
 
   componentDidMount(){
@@ -74,10 +76,20 @@ class Piano extends React.Component {
         this.setState({ blob: blob })
       }
     }
-
-
-
   }
+
+  saveAudio(){
+    const request = new Request()
+    const payload = {
+      name: "sequence 1",
+      project: "http://localhost:8080/api/projects/1",
+      user: "http://localhost:8080/api/users/1",
+      audio: this.state.blob
+    }
+    request.post("/api/sequences", payload)
+  }
+
+
 
   playNote(e){
     const key = document.querySelector(`div[data-key="${e.key}"]`)
@@ -105,6 +117,7 @@ class Piano extends React.Component {
         <button onClick={ this.stopRecord }>stop</button>
         { keys }
         <audio controls></audio>
+        <button onClick={ this.saveAudio }>Save audio</button>
       </div>
     )
 
