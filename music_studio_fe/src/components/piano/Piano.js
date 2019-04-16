@@ -53,7 +53,12 @@ class Piano extends React.Component {
 
 
       this.state.synth.triggerAttack(note)
+
       window.addEventListener("keyup", () => {
+        this.state.synth.triggerRelease()
+      })
+
+      window.addEventListener("mouseup", () => {
         this.state.synth.triggerRelease()
       })
 
@@ -65,6 +70,8 @@ class Piano extends React.Component {
         let blob = new Blob(chunks, {type: 'audio/ogg; codecs=opus'})
         let audioUrl = URL.createObjectURL(blob);
         audio.src = audioUrl
+        console.log(audioUrl);
+        this.setState({ blob: blob })
       }
     }
 
