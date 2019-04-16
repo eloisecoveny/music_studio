@@ -54,21 +54,6 @@ public class DataLoader implements ApplicationRunner {
         projectRepository.save(project3);
         userRepository.save(user3);
 
-        Sequence sequence1 = new Sequence("Trombone", project1, user1);
-        sequenceRepository.save(sequence1);
-        projectRepository.save(project1);
-        userRepository.save(user1);
-
-        Sequence sequence2 = new Sequence("Jazzy number", project2, user2);
-        sequenceRepository.save(sequence2);
-        projectRepository.save(project2);
-        userRepository.save(user2);
-
-        Sequence sequence3 = new Sequence("Melody", project3, user3);
-        sequenceRepository.save(sequence3);
-        projectRepository.save(project3);
-        userRepository.save(user3);
-
         Tag jazz = new Tag("jazz");
         tagRepository.save(jazz);
         project1.addTag(jazz);
