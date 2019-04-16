@@ -9,7 +9,7 @@ class Piano extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      blob: null,
+      chunks: null,
       recording: false,
       audio: null,
       synth: null,
