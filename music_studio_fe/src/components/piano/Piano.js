@@ -8,7 +8,7 @@ class Piano extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      blob: null,
+      chunks: null,
       recording: false,
       audio: null,
       synth: null,
@@ -71,12 +71,9 @@ class Piano extends React.Component {
         let audioUrl = URL.createObjectURL(blob);
         audio.src = audioUrl
         console.log(audioUrl);
-        this.setState({ blob: blob })
+        this.setState({ chunks: chunks })
       }
     }
-
-
-
   }
 
   playNote(e){
