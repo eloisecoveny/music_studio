@@ -72,8 +72,8 @@ class Piano extends React.Component {
         let blob = new Blob(chunks, {type: 'audio/ogg; codecs=opus'})
         let audioUrl = URL.createObjectURL(blob);
         audio.src = audioUrl
-        console.log(audioUrl);
         this.setState({ blob: blob })
+        console.log(this.state.blob);
       }
     }
   }
