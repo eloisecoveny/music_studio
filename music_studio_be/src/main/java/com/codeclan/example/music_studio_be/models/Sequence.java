@@ -26,9 +26,10 @@ public class Sequence {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
+    @Column(name = "audio")
     private Blob audio;
 
-    public Sequence(String name, Project project, User user){
+    public Sequence(String name, Project project, User user, Blob audio){
         this.name = name;
         this.project = project;
         this.user = user;
@@ -36,6 +37,14 @@ public class Sequence {
     }
 
     public Sequence() {
+    }
+
+    public Blob getAudio() {
+        return audio;
+    }
+
+    public void setAudio(Blob audio) {
+        this.audio = audio;
     }
 
     public Long getId() {
