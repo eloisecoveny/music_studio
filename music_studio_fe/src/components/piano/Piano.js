@@ -9,7 +9,7 @@ class Piano extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      audioData: "H",
+      audioData: "",
       recording: false,
       audio: null,
       synth: null,
@@ -27,6 +27,7 @@ class Piano extends React.Component {
 
   componentDidMount(){
     window.addEventListener('keydown', this.playNote);
+    this.generateContext()
   }
 
   startRecord(){
@@ -48,9 +49,7 @@ class Piano extends React.Component {
 
 
   handlePlayNote(note){
-    if (!this.state.recorder){
-      this.generateContext()
-    } else if (this.state.recorder){
+    if (this.state.recorder){
       this.state.synth.connect(this.state.destination)
       this.state.synth.toMaster();
 
@@ -73,7 +72,7 @@ class Piano extends React.Component {
         let audio = this.state.audio
         let blob = new Blob(chunks, {type: 'audio/ogg; codecs=opus'})
         let audioUrl = URL.createObjectURL(blob);
-        let base64data = "A"
+        let base64data = ""
         var reader = new FileReader();
         reader.readAsDataURL(blob);
         reader.onloadend = () => {
