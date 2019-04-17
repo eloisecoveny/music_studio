@@ -2,6 +2,7 @@ import React from "react";
 import PianoKey from "./PianoKey"
 import Tone from "tone"
 import Request from "../../helpers/request"
+import RecordingTools from "../recording/RecordingTools"
 import "./Piano.css"
 
 
@@ -31,11 +32,18 @@ class Piano extends React.Component {
   }
 
   startRecord(){
-    this.state.recorder.start()
+    if (!this.state.recording){
+      this.state.recorder.start()
+      this.setState({ recording: true })
+    }
   }
 
   stopRecord(){
-    this.state.recorder.stop();
+    if (this.state.recording){
+      this.state.recorder.stop()
+      this.setState({ recording: false })
+    }
+
   }
 
   generateContext(){
@@ -85,12 +93,12 @@ class Piano extends React.Component {
     }
   }
 
-  saveAudio(){
+  saveAudio(name){
     const request = new Request()
     const payload = {
-      name: "sequence 1",
-      project: "http://localhost:8080/api/projects/1",
-      user: "http://localhost:8080/api/users/1",
+      name: name,
+      project: this.props.currentProject,
+      user: this.props.currentUser,
       audio: this.state.audioData
     }
     request.post("/api/sequences", payload)
@@ -120,11 +128,9 @@ class Piano extends React.Component {
     return (
       <div className="piano">
         <h1>I am piano!</h1>
-        <button onClick={ this.startRecord }>start</button>
-        <button onClick={ this.stopRecord }>stop</button>
+        <RecordingTools startRecord={ this.startRecord } stopRecord={ this.stopRecord } saveAudio={ this.saveAudio }></RecordingTools>
         { keys }
-        <audio controls></audio>
-        <button onClick={ this.saveAudio }>Save audio</button>
+        <audio id="main-audio"></audio>
       </div>
     )
 

@@ -66,7 +66,7 @@ class StudioContainer extends Component {
         return <ProjectSelector currentUser={this.state.currentUser} handleProjectSelection={this.handleProjectSelection}/>
         } }/>
         <Route exact path="/studio" render={ (props) => {
-        return <Piano sound="piano"></Piano>
+        return <Piano currentUser={ this.state.currentUser } currentProject={ this.state.currentProject } sound="piano"></Piano>
         } }/>
         </Switch>
         </Router>
