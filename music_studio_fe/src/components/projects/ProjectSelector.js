@@ -34,7 +34,8 @@ class ProjectSelector extends React.Component {
 
     return(
       <div>
-        <h1>Project Selector</h1>
+        <h1>Welcome { this.props.currentUser.username }!</h1>
+        <h4>Pick an existing project or create a new one</h4>
         <ul>
           {projects}
         </ul>
