@@ -1,6 +1,7 @@
 package com.codeclan.example.music_studio_be.controllers;
 
 import com.codeclan.example.music_studio_be.models.Project;
+import com.codeclan.example.music_studio_be.models.User;
 import com.codeclan.example.music_studio_be.repositories.ProjectRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -13,5 +14,10 @@ public class ProjectController {
 
     @Autowired
     ProjectRepository projectRepository;
+
+    @GetMapping("/project/{name}")
+    public List<Project> getProjectByName(@PathVariable String name){
+        return projectRepository.findProjectByName(name);
+    }
 
 }

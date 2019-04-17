@@ -10,6 +10,7 @@ class ProjectSelector extends React.Component {
     }
     this.handleProjectInput = this.handleProjectInput.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleExistingProject = this.handleExistingProject.bind(this)
   }
 
   handleProjectInput(e){
@@ -19,19 +20,37 @@ class ProjectSelector extends React.Component {
   handleSubmit(e){
     const project = {
       name: this.state.newProjectName,
-      user: this.props.currentUser._links.self.href
+      user: "localhost:8080/users/" + this.props.currentUser.id
     }
     const request = new Request();
     request.post("/api/projects", project)
-    this.props.handleProjectSelection(project)
+    .then(() => {
+      request.get("/api/projects/project/" + project.name)
+      .then((data) => {
+        this.props.handleProjectSelection(data[0])
+      })
+    })
     this.setState({ newProjectName: "" })
   }
 
-  render(){
-
-    const projects = this.props.currentUser.projects.map((project, index) => {
-      return <li className="projectLink" key={index} onClick={ () => this.props.handleProjectSelection(project) }><Link to="/studio">{ project.name }</Link></li>
+  handleExistingProject(project){
+    const request = new Request();
+    request.get("/api/projects/project/" + project.name)
+    .then((data) => {
+      this.props.handleProjectSelection(data[0])
     })
+  }
+
+  render(){
+    let projects;
+    if(this.props.currentUser){
+      projects = this.props.currentUser.projects.map((project, index) => {
+        return <li className="projectLink" key={index} onClick={ () => this.handleExistingProject(project) }><Link to="/studio">{ project.name }</Link></li>
+      })
+    } else {
+      return null
+    }
+
 
     return(
       <div>
