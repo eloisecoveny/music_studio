@@ -8,7 +8,7 @@ const NavBar = (props) => {
       <h3>Sound Studio</h3>
       <ul>
         <li className="navLink">
-          <Link to="/home">Log In/ Sign up</Link>
+          <Link to="/login">Log In/ Sign up</Link>
         </li>
         <li className="navLink">
           <Link to="/projects">Projects</Link>

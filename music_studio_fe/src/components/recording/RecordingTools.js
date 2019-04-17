@@ -6,7 +6,7 @@ class RecordingTools extends Component {
     return (
       <div className="recording-tools">
         <button>rewind</button>
-        <button>play</button>
+        <button>play</button>  
         <button>pause</button>
         <button>record</button>
         <button>save</button>

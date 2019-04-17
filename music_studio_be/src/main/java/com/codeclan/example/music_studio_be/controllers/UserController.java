@@ -6,27 +6,22 @@ import com.codeclan.example.music_studio_be.repositories.SequenceRepository;
 import com.codeclan.example.music_studio_be.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/users")
+@RequestMapping("/api/users")
 public class UserController {
 
     @Autowired
     UserRepository userRepository;
 
-    @Autowired
-    ProjectRepository projectRepository;
-
-    @Autowired
-    SequenceRepository sequenceRepository;
-
-    @GetMapping
-    public List<User> getAllUsers(){
-        return userRepository.findAll();
+    @GetMapping("/username/{name}")
+    public List<User> getUserByName(@PathVariable String name){
+        return userRepository.findUserByUsername(name);
     }
 
 }
