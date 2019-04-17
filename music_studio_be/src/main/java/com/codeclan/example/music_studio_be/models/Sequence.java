@@ -3,7 +3,6 @@ package com.codeclan.example.music_studio_be.models;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
-import java.sql.Blob;
 
 @Entity
 @Table(name = "sequences")
@@ -26,11 +25,10 @@ public class Sequence {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    @Lob
-    @Column(name = "audio")
-    private byte[] audio;
+    @Column(name = "audio", length = 1000000)
+    private String audio;
 
-    public Sequence(String name, Project project, User user, byte[] audio){
+    public Sequence(String name, Project project, User user, String audio){
         this.name = name;
         this.project = project;
         this.user = user;
@@ -40,11 +38,11 @@ public class Sequence {
     public Sequence() {
     }
 
-    public byte[] getAudio() {
+    public String getAudio() {
         return audio;
     }
 
-    public void setAudio(byte[] audio) {
+    public void setAudio(String audio) {
         this.audio = audio;
     }
 

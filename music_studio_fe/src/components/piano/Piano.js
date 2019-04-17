@@ -9,7 +9,7 @@ class Piano extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      chunks: null,
+      audioData: "H",
       recording: false,
       audio: null,
       synth: null,
@@ -22,6 +22,7 @@ class Piano extends React.Component {
     this.startRecord = this.startRecord.bind(this)
     this.stopRecord = this.stopRecord.bind(this)
     this.saveAudio = this.saveAudio.bind(this)
+    this.generateContext = this.generateContext.bind(this)
   }
 
   componentDidMount(){
@@ -36,23 +37,24 @@ class Piano extends React.Component {
     this.state.recorder.stop();
   }
 
+  generateContext(){
+    const audio = document.querySelector("audio")
+    const synth = new Tone.Synth();
+    const context = Tone.context;
+    const destination = context.createMediaStreamDestination();
+    const recorder = new MediaRecorder(destination.stream)
+    this.setState({ audio: audio, synth: synth, context: context, destination: destination, recorder: recorder })
+  }
+
 
   handlePlayNote(note){
     if (!this.state.recorder){
-      const audio = document.querySelector("audio")
-      const synth = new Tone.Synth();
-      const context = Tone.context;
-      const destination = context.createMediaStreamDestination();
-      const recorder = new MediaRecorder(destination.stream)
-      this.setState({ audio: audio, synth: synth, context: context, destination: destination, recorder: recorder })
+      this.generateContext()
     } else if (this.state.recorder){
       this.state.synth.connect(this.state.destination)
       this.state.synth.toMaster();
 
       const chunks = [];
-
-
-
 
       this.state.synth.triggerAttack(note)
 
@@ -71,9 +73,15 @@ class Piano extends React.Component {
         let audio = this.state.audio
         let blob = new Blob(chunks, {type: 'audio/ogg; codecs=opus'})
         let audioUrl = URL.createObjectURL(blob);
+        let base64data = "A"
+        var reader = new FileReader();
+        reader.readAsDataURL(blob);
+        reader.onloadend = () => {
+          base64data = reader.result;
+          this.setState({ audioData: base64data })
+        }
         audio.src = audioUrl
-        this.setState({ blob: blob })
-        console.log(this.state.blob);
+
       }
     }
   }
@@ -84,7 +92,7 @@ class Piano extends React.Component {
       name: "sequence 1",
       project: "http://localhost:8080/api/projects/1",
       user: "http://localhost:8080/api/users/1",
-      audio: this.state.blob
+      audio: this.state.audioData
     }
     request.post("/api/sequences", payload)
   }

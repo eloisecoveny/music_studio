@@ -13,5 +13,5 @@ public interface EmbedSequences {
     String getName();
     User getUser();
     Project getProject();
-    Blob getAudio();
+    String getAudio();
 }
