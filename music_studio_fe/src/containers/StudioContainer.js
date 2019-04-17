@@ -3,6 +3,7 @@ import Piano from "../components/piano/Piano"
 import Request from "../helpers/request.js"
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import NavBar from "../components/nav/NavBar"
+import ProjectSelector from "../components/projects/ProjectSelector"
 
 class StudioContainer extends Component {
   constructor(props){
@@ -15,6 +16,7 @@ class StudioContainer extends Component {
       foundUser: null
     }
     this.handleSelectedUser = this.handleSelectedUser.bind(this)
+    this.handleProjectSelection = this.handleProjectSelection.bind(this)
   }
 
   componentDidMount(){
@@ -27,6 +29,10 @@ class StudioContainer extends Component {
     this.setState({ foundUser: user })
   }
 
+  handleProjectSelection(project){
+    this.setState({ currentProject: project })
+  }
+
   render(){
     return (
       <div>
@@ -37,7 +43,7 @@ class StudioContainer extends Component {
         return null
         } }/>
         <Route exact path="/projects" render={ (props) => {
-        return null
+        return <ProjectSelector currentUser={this.state.currentUser} handleProjectSelection={this.handleProjectSelection}/>
         } }/>
         <Route exact path="/studio" render={ (props) => {
         return <Piano sound="piano"></Piano>
