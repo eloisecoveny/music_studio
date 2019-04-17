@@ -4,6 +4,7 @@ import Request from "../helpers/request.js"
 import UserLogIn from "../components/login/UserLogIn"
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import NavBar from "../components/nav/NavBar"
+import ProjectSelector from "../components/projects/ProjectSelector"
 
 class StudioContainer extends Component {
   constructor(props){
@@ -18,6 +19,8 @@ class StudioContainer extends Component {
     this.handleSelectedUser = this.handleSelectedUser.bind(this)
     this.handleUserLogin = this.handleUserLogin.bind(this)
     this.handleNewUser = this.handleNewUser.bind(this)
+    this.handleProjectSelection = this.handleProjectSelection.bind(this)
+
   }
 
   componentDidMount(){
@@ -29,6 +32,7 @@ class StudioContainer extends Component {
   handleSelectedUser(user){
     this.setState({ foundUser: user })
   }
+
 
   handleUserLogin(name){
     const foundUser = this.state.users.find((user) => {
@@ -43,6 +47,9 @@ class StudioContainer extends Component {
 
   handleNewUser(user){
     this.setState({ currentUser: user })
+
+  handleProjectSelection(project){
+    this.setState({ currentProject: project })
   }
 
   render(){
@@ -55,7 +62,7 @@ class StudioContainer extends Component {
         return <UserLogIn currentUser={ this.state.currentUser } handleUserLogin={ this.handleUserLogin } handleNewUser={ this.handleNewUser }></UserLogIn>
         } }/>
         <Route exact path="/projects" render={ (props) => {
-        return null
+        return <ProjectSelector currentUser={this.state.currentUser} handleProjectSelection={this.handleProjectSelection}/>
         } }/>
         <Route exact path="/studio" render={ (props) => {
         return <Piano sound="piano"></Piano>
