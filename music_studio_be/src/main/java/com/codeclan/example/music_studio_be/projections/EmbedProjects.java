@@ -12,7 +12,7 @@ import java.util.List;
 public interface EmbedProjects {
     Long getId();
     String getName();
-    List<User> getUsers();
+    User getUser();
     List<Sequence> getSequences();
     List<Tag> getTags();
 }

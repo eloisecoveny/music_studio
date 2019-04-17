@@ -19,14 +19,9 @@ public class Project {
     private String name;
 
     @JsonIgnoreProperties("projects")
-    @ManyToMany
-    @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
-    @JoinTable(
-            name = "users_projects",
-            joinColumns = {@JoinColumn(name = "project_id", nullable = false, updatable = false)},
-            inverseJoinColumns = {@JoinColumn(name = "user_id", nullable = false, updatable = false)}
-    )
-    private List<User> users;
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
 
     @OneToMany(mappedBy = "project", fetch = FetchType.LAZY)
     private List<Sequence> sequences;
@@ -43,8 +38,7 @@ public class Project {
 
     public Project(String name, User user){
         this.name = name;
-        this.users = new ArrayList<User>();
-        this.users.add(user);
+        this.user = user;
         this.tags = new ArrayList<Tag>();
     }
 
@@ -53,18 +47,6 @@ public class Project {
 
     public void addTag(Tag tag){
         this.tags.add(tag);
-    }
-
-    public void addUser(User user){
-        this.users.add(user);
-    }
-
-    public List<Tag> getTags() {
-        return tags;
-    }
-
-    public void setTags(List<Tag> tags) {
-        this.tags = tags;
     }
 
     public Long getId() {
@@ -83,12 +65,12 @@ public class Project {
         this.name = name;
     }
 
-    public List<User> getUsers() {
-        return users;
+    public User getUser() {
+        return user;
     }
 
-    public void setUsers(List<User> users) {
-        this.users = users;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public List<Sequence> getSequences() {
@@ -97,5 +79,13 @@ public class Project {
 
     public void setSequences(List<Sequence> sequences) {
         this.sequences = sequences;
+    }
+
+    public List<Tag> getTags() {
+        return tags;
+    }
+
+    public void setTags(List<Tag> tags) {
+        this.tags = tags;
     }
 }

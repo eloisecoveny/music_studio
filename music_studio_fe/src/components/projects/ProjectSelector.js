@@ -1,5 +1,6 @@
 import React from "react";
 import Request from "../../helpers/request.js";
+import { Link } from "react-router-dom";
 
 class ProjectSelector extends React.Component {
   constructor(props){
@@ -29,7 +30,7 @@ class ProjectSelector extends React.Component {
   render(){
 
     const projects = this.props.currentUser.projects.map((project, index) => {
-      return <li className="projectLink" onClick={ () => this.handleSelection(project) }>{ project.name }</li>
+      return <li className="projectLink" key={index} onClick={ () => this.props.handleProjectSelection(project) }><Link to="/studio">{ project.name }</Link></li>
     })
 
     return(
@@ -40,7 +41,7 @@ class ProjectSelector extends React.Component {
           {projects}
         </ul>
         <input type="text" placeholder="Create a new project" value={this.state.newProjectName} onChange={this.handleProjectInput}></input>
-        <button onClick={this.handleSubmit}>Create Project</button>
+        <button onClick={this.handleSubmit}><Link to="/studio">Create Project</Link></button>
       </div>
     )
   }

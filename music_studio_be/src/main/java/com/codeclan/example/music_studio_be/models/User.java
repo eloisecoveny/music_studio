@@ -1,7 +1,6 @@
 package com.codeclan.example.music_studio_be.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -18,13 +17,8 @@ public class User {
     @Column(name = "username")
     private String username;
 
-    @JsonIgnoreProperties("users")
-    @ManyToMany
-    @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
-    @JoinTable(name = "users_projects",
-            joinColumns = {@JoinColumn(name = "user_id", nullable = false, updatable = false)},
-            inverseJoinColumns = {@JoinColumn(name = "project_id", nullable = false, updatable = false)}
-    )
+    @JsonIgnoreProperties("user")
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     private List<Project> projects;
 
     @JsonIgnoreProperties("user")
@@ -38,15 +32,6 @@ public class User {
     }
 
     public User() {
-    }
-
-
-    public void addProject(Project project){
-        this.projects.add(project);
-    }
-
-    public void addSequence(Sequence sequence){
-        this.sequences.add(sequence);
     }
 
     public Long getId() {
@@ -69,12 +54,12 @@ public class User {
         return projects;
     }
 
-    public List<Sequence> getSequences() {
-        return sequences;
-    }
-
     public void setProjects(List<Project> projects) {
         this.projects = projects;
+    }
+
+    public List<Sequence> getSequences() {
+        return sequences;
     }
 
     public void setSequences(List<Sequence> sequences) {

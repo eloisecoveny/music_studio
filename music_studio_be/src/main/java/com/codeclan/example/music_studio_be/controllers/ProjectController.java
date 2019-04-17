@@ -14,13 +14,4 @@ public class ProjectController {
     @Autowired
     ProjectRepository projectRepository;
 
-    @GetMapping(value = "/tag/{tagId}")
-    public List<Project> findProjectByTagsId(@PathVariable Long tagId){
-        return projectRepository.findProjectByTagsId(tagId);
-    }
-
-    @GetMapping(value = "/user/{userId}")
-    public List<Project> findProjectByUsersId(@PathVariable Long userId){
-        return projectRepository.findProjectByUsersId(userId);
-    }
 }
