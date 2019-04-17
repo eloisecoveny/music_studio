@@ -18,7 +18,7 @@ class ProjectSelector extends React.Component {
   handleSubmit(e){
     const project = {
       name: this.state.newProjectName,
-      user: this.props.currentUser
+      user: this.props.currentUser._links.self.href
     }
     const request = new Request();
     request.post("/api/projects", project)

@@ -44,7 +44,7 @@ public class Project {
     public Project(String name, User user){
         this.name = name;
         this.users = new ArrayList<User>();
-        this.addUser(user);
+        this.users.add(user);
         this.tags = new ArrayList<Tag>();
     }
 

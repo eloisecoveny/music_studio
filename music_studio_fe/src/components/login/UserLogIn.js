@@ -1,5 +1,6 @@
 import React from "react";
 import Request from "../../helpers/request"
+import { Link } from "react-router-dom"
 
 class UserLogIn extends React.Component {
   constructor(props){
@@ -48,8 +49,8 @@ class UserLogIn extends React.Component {
     return(
       <div className="user-login">
         <input onChange={ this.handleInput } type="text" placeholder="Enter Username..."/>
-        <button onClick={ this.handleUserLogin }>Log Inp</button>
-        <button onClick={ this.handleNewUser }>Sign up</button>
+        <button onClick={ this.handleUserLogin }><Link to="/projects">Log in</Link></button>
+        <button onClick={ this.handleNewUser }><Link to="/projects">Sign Up</Link></button>
         { loginMessage }
       </div>
     )

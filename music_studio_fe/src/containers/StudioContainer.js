@@ -47,6 +47,7 @@ class StudioContainer extends Component {
 
   handleNewUser(user){
     this.setState({ currentUser: user })
+  }
 
   handleProjectSelection(project){
     this.setState({ currentProject: project })
