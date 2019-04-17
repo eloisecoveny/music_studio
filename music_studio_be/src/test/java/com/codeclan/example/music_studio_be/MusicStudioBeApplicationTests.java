@@ -39,30 +39,8 @@ public class MusicStudioBeApplicationTests {
 	}
 
 	@Test
-	public void canGetAllUsers(){
+	public void canGetAllUsers() {
 		List<User> found = userRepository.findAll();
 		assertEquals(3, found.size());
 	}
-
-	@Test
-	public void canGetAllProjectsByTagId(){
-		List<Project> found = projectRepository.findProjectByTagsId(1L);
-		assertEquals(1, found.size());
-	}
-
-	@Test
-	public void canGetAllProjectsByUserId(){
-		List<Project> found = projectRepository.findProjectByUsersId(1L);
-		assertEquals(1, found.size());
-	}
-//
-//	@Test
-//	public void givenFilePath_whenUsingFilesLines_thenFileData() {
-//		Path path = Paths.get(getClass().getClassLoader().getResource("fileTest.txt").toURI());
-//
-//		Stream<Byte> lines = Files.lines(path);
-//		String data = lines.collect(Collectors.joining("\n"));
-//		lines.close();
-//	}
-
 }

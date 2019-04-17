@@ -44,21 +44,17 @@ public class DataLoader implements ApplicationRunner {
 
         Project project1 = new Project("Horror Studio", user1);
         projectRepository.save(project1);
-        userRepository.save(user1);
 
         Project project2 = new Project("Summertime", user2);
         projectRepository.save(project2);
-        userRepository.save(user2);
 
         Project project3 = new Project("Test project", user3);
         projectRepository.save(project3);
-        userRepository.save(user3);
 
         Tag jazz = new Tag("jazz");
         tagRepository.save(jazz);
         project1.addTag(jazz);
         projectRepository.save(project1);
-        tagRepository.save(jazz);
     }
 
 }
