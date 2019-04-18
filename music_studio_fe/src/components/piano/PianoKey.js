@@ -4,7 +4,7 @@ import "./PianoKey.css"
 const PianoKey = (props) => {
 
   const playKey = () => {
-    props.handlePlayNote(props.note)
+    props.handleClickPlayNote(props.note)
   }
 
   // function playNote(e){

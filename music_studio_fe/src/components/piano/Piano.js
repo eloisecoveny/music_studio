@@ -24,11 +24,32 @@ class Piano extends React.Component {
     this.stopRecord = this.stopRecord.bind(this)
     this.saveAudio = this.saveAudio.bind(this)
     this.generateContext = this.generateContext.bind(this)
+    this.clickHandlePlayNote = this.clickHandlePlayNote.bind(this)
   }
 
   componentDidMount(){
-    window.addEventListener('keydown', this.playNote);
+    let heldKeys = []
+    window.addEventListener('keydown', (e) => {
+      if (!heldKeys.includes(e.key)){
+        heldKeys.push(e.key)
+        this.playNote(e)
+      } else {
+        return null
+      }
+    });
     this.generateContext()
+    window.addEventListener("keyup", (e) => {
+      if (heldKeys.includes(e.key)){
+        let index = heldKeys.indexOf(e.key)
+        heldKeys.splice(index, 1)
+        this.state.synth.triggerRelease()
+      }
+
+    })
+  }
+
+  clickHandlePlayNote(note){
+    this.state.synth.triggerAttackRelease(note, 0.2)
   }
 
   startRecord(){
@@ -63,11 +84,10 @@ class Piano extends React.Component {
 
       const chunks = [];
 
-      this.state.synth.triggerAttack(note)
+      this.state.synth.triggerAttackRelease(note)
 
-      window.addEventListener("keyup", () => {
-        this.state.synth.triggerRelease()
-      })
+
+
 
       window.addEventListener("mouseup", () => {
         this.state.synth.triggerRelease()
@@ -97,8 +117,8 @@ class Piano extends React.Component {
     const request = new Request()
     const payload = {
       name: name,
-      project: this.props.currentProject,
-      user: this.props.currentUser,
+      project: "http://localhost:8080/api/users/" + this.props.currentProject.id,
+      user: "http://localhost:8080/api/users/" + this.props.currentUser.id,
       audio: this.state.audioData
     }
     request.post("/api/sequences", payload)
@@ -110,10 +130,9 @@ class Piano extends React.Component {
     const key = document.querySelector(`div[data-key="${e.key}"]`)
     if (key){
       this.handlePlayNote(key.getAttribute("note"));
-
     }
-
   }
+
 
   render(){
 
@@ -122,7 +141,7 @@ class Piano extends React.Component {
     const notes = [{note: "A4", input: "a"}, {note: "A7", input: "1"}, {note: "B4", input: "s"}, {note: "C4", input: "q"}, {note: "C7", input: "2"}, {note: "D4", input: "w"}, {note: "D7", input: "3"}, {note: "E4", input: "e"}, {note: "F4", input: "r"}, {note: "F7", input: "4"}, {note: "G4", input: "t"}, {note: "G7", input: "5"}, {note: "A5", input: "y"}, {note: "A8", input: "6"}, {note: "B5", input: "u"}, {note: "C5", input: "i"}, {note: "C8", input: "7"}, {note: "D5", input: "o"}, {note: "D8", input: "8"}, {note: "E5", input: "p"}, {note: "F8", input: "9"}, {note: "F5", input: "k"}, {note: "G8", input: "0"}, {note: "G5", input: "l"}]
 
     const keys = notes.map((note, index) => {
-       return <PianoKey handlePlayNote={ this.handlePlayNote } note={ note.note } input={ note.input } key={ index }></PianoKey>
+       return <PianoKey handleClickPlayNote={ this.clickHandlePlayNote } note={ note.note } input={ note.input } key={ index }></PianoKey>
     })
 
     return (
