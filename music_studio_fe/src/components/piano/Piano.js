@@ -148,7 +148,7 @@ class Piano extends React.Component {
       <div className="piano">
         <h1>I am piano!</h1>
         <RecordingTools startRecord={ this.startRecord } stopRecord={ this.stopRecord } saveAudio={ this.saveAudio }></RecordingTools>
-        { keys }
+        <div className= "KeyContainer">{ keys } </div>
         <audio id="main-audio"></audio>
       </div>
     )
