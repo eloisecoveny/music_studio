@@ -5,6 +5,7 @@ import UserLogIn from "../components/login/UserLogIn"
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import NavBar from "../components/nav/NavBar"
 import ProjectSelector from "../components/projects/ProjectSelector"
+import DashboardContainer from "../components/dashboard/DashboardContainer"
 
 class StudioContainer extends Component {
   constructor(props){
@@ -66,7 +67,9 @@ class StudioContainer extends Component {
         return <ProjectSelector currentUser={this.state.currentUser} handleProjectSelection={this.handleProjectSelection}/>
         } }/>
         <Route exact path="/studio" render={ (props) => {
-        return <Piano currentUser={ this.state.currentUser } currentProject={ this.state.currentProject } sound="piano"></Piano>
+        return <div><Piano currentUser={ this.state.currentUser } currentProject={ this.state.currentProject } sound="piano"></Piano>
+        <DashboardContainer currentUser={this.state.currentUser} currentProject></DashboardContainer></div>
+
         } }/>
         </Switch>
         </Router>

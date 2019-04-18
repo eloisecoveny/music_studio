@@ -1,8 +1,6 @@
 package com.codeclan.example.music_studio_be.controllers;
 
 import com.codeclan.example.music_studio_be.models.User;
-import com.codeclan.example.music_studio_be.repositories.ProjectRepository;
-import com.codeclan.example.music_studio_be.repositories.SequenceRepository;
 import com.codeclan.example.music_studio_be.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
