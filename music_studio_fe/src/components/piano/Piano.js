@@ -143,10 +143,10 @@ class Piano extends React.Component {
 
 
 
-    const notes = [{note: "A4", input: "a"}, {note: "A#4", input: "1"}, {note: "B4", input: "s"}, {note: "C4", input: "q"}, {note: "C#4", input: "2"}, {note: "D4", input: "w"}, {note: "D#4", input: "3"}, {note: "E4", input: "e"}, {note: "F4", input: "r"}, {note: "F#4", input: "4"}, {note: "G4", input: "t"}, {note: "G#4", input: "5"}, {note: "A4", input: "y"}, {note: "A#4", input: "6"}, {note: "B4", input: "u"}, {note: "C5", input: "i"}, {note: "C#4", input: "7"}, {note: "D5", input: "o"}, {note: "D#5", input: "8"}, {note: "E5", input: "p"}, {note: "F#5", input: "9"}, {note: "F5", input: "k"}, {note: "G#5", input: "0"}, {note: "G5", input: "l"}]
+    const notes = [{note: "A4", input: "a", class: "A"}, {note: "A#4", input: "1", class: "B"}, {note: "B4", input: "s", class: "C"}, {note: "C4", input: "q", class: "D"}, {note: "C#4", input: "2", class: "E"}, {note: "D4", input: "w", class: "F"}, {note: "D#4", input: "3", class: "G"}, {note: "E4", input: "e", class: "H"}, {note: "F4", input: "r", class: "I"}, {note: "F#4", input: "4", class: "J"}, {note: "G4", input: "t", class: "K"}, {note: "G#4", input: "5", class: "L"}, {note: "A4", input: "y", class: "M"}, {note: "A#4", input: "6", class: "N"}, {note: "B4", input: "u", class: "O"}, {note: "C5", input: "i", class: "P"}, {note: "C#5", input: "7", class: "Q"}, {note: "D5", input: "o", class: "R"}, {note: "D#5", input: "8", class: "S"}, {note: "E5", input: "p", class: "T"}, {note: "F#5", input: "9", class: "U"}, {note: "F5", input: "k", class: "V"}, {note: "G#5", input: "0", class: "W"}, {note: "G5", input: "l", class: "X"}]
 
     const keys = notes.map((note, index) => {
-      return <PianoKey handleClickPlayNote={ this.clickHandlePlayNote } note={ note.note } input={ note.input } key={ index }></PianoKey>
+      return <PianoKey handleClickPlayNote={ this.clickHandlePlayNote } note={ note.note } class={ note.class } input={ note.input } key={ index }></PianoKey>
     })
 
     return (

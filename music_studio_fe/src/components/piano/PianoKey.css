@@ -10,7 +10,7 @@
   margin: auto;
 }
 
-.A4 {
+.A {
   border: 1px solid black;
   width: 50px;
   height: 200px;
@@ -19,7 +19,7 @@
 
 }
 
-.A7 {
+.B {
   position: absolute;
   bottom: 500px;
   left: 36px;
@@ -32,7 +32,7 @@
   box-shadow: 1px 1px 0 #555 2px 2px 0 #555;
 }
 
-.B4{
+.C {
   border: 1px solid black;
   width: 50px;
   height: 200px;
@@ -44,7 +44,7 @@
 
 }
 
-.C4{
+.D {
   border: 1px solid black;
   width: 50px;
   height: 200px;
@@ -55,7 +55,7 @@
   left: 100px;
 }
 
-.C7{
+.E{
   position: absolute;
   bottom: 500px;
   left: 136px;
@@ -66,10 +66,10 @@
   background: #000;
   border-radius: 0 0 8px 8px;
   box-shadow: 1px 1px 0 #555 2px 2px 0 #555;
-  
+
 }
 
-.D4{
+.F{
   border: 1px solid black;
   width: 50px;
   height: 200px;
@@ -80,7 +80,7 @@
   left: 150px;
 }
 
-.E4{
+.G{
   border: 1px solid black;
   width: 50px;
   height: 200px;
@@ -91,7 +91,7 @@
   left: 200px;
 }
 
-.D7{
+.H{
   position: absolute;
   bottom: 500px;
   left: 185px;
@@ -105,7 +105,7 @@
 
 }
 
-.F4{
+.I{
   border: 1px solid black;
   width: 50px;
   height: 200px;
@@ -116,7 +116,7 @@
   left: 250px;
 }
 
-.F7{
+.J{
   position: absolute;
   bottom: 500px;
   left: 286px;
@@ -129,7 +129,7 @@
   box-shadow: 1px 1px 0 #555 2px 2px 0 #555;
 }
 
-.G4{
+.K{
   border: 1px solid black;
   width: 50px;
   height: 200px;
@@ -140,7 +140,7 @@
   left: 300px;
 }
 
-.A5{
+.L{
   border: 1px solid black;
   width: 50px;
   height: 200px;
@@ -151,7 +151,7 @@
   left: 350px;
 }
 
-.G7{
+.M{
   position: absolute;
   bottom: 500px;
   left: 336px;
@@ -164,7 +164,7 @@
   box-shadow: 1px 1px 0 #555 2px 2px 0 #555;
 }
 
-.B5{
+.N{
   border: 1px solid black;
   width: 50px;
   height: 200px;
@@ -175,7 +175,7 @@
   left: 400px;
 }
 
-.A8{
+.O{
   position: absolute;
   bottom: 500px;
   left: 386px;
@@ -188,7 +188,7 @@
   box-shadow: 1px 1px 0 #555 2px 2px 0 #555;
 }
 
-.C5{
+.P{
   border: 1px solid black;
   width: 50px;
   height: 200px;
@@ -199,7 +199,7 @@
   left: 450px;
 }
 
-.D5{
+.Q{
   border: 1px solid black;
   width: 50px;
   height: 200px;
@@ -210,7 +210,7 @@
   left: 500px;
 }
 
-.C8{
+.R{
   position: absolute;
   bottom: 500px;
   left: 486px;
@@ -223,7 +223,7 @@
   box-shadow: 1px 1px 0 #555 2px 2px 0 #555;
 }
 
-.E5{
+.S{
   border: 1px solid black;
   width: 50px;
   height: 200px;
@@ -234,7 +234,7 @@
   left: 550px;
 }
 
-.D8{
+.T{
   position: absolute;
   bottom: 500px;
   left: 536px;
@@ -247,7 +247,7 @@
   box-shadow: 1px 1px 0 #555 2px 2px 0 #555;
 }
 
-.F5{
+.U{
   border: 1px solid black;
   width: 50px;
   height: 200px;
@@ -258,7 +258,7 @@
   left: 600px;
 }
 
-.F8{
+.V{
   position: absolute;
   bottom: 500px;
   left: 586px;
@@ -271,7 +271,7 @@
   box-shadow: 1px 1px 0 #555 2px 2px 0 #555;
 }
 
-.G5{
+.W{
   border: 1px solid black;
   width: 50px;
   height: 200px;
@@ -282,7 +282,7 @@
   left: 650px;
 }
 
-.G8{
+.X{
   position: absolute;
   bottom: 500px;
   left: 636px;
@@ -295,14 +295,3 @@
   box-shadow: 1px 1px 0 #555 2px 2px 0 #555;
 
 }
-
-
-
-
-
-
-
-
-
-
-

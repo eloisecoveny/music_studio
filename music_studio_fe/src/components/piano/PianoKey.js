@@ -23,7 +23,7 @@ const PianoKey = (props) => {
 
 
   return (
-    <div className={ props.note }>
+    <div className={ props.class }>
       <div onClick={playKey} className="key" data-key={ props.input } note={ props.note }>
       </div>
     </div>
