@@ -1,14 +1,33 @@
 import React from "react";
+import UserInfo from "./UserInfo";
+import ProjectInfo from "./ProjectInfo";
+import SequenceInfo from "./SequenceInfo";
 
 
-const DashboardContainer = (props) => {
+class DashboardContainer extends React.Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      selectedSequence: null
+    }
+    this.handleSelection = this.handleSelection.bind(this);
+  }
 
-  return(
-    <div>
-    <h1>Dashboard Container</h1>
+  handleSelection(sequence){
+    this.setState({ selectedSequence: sequence })
+  }
 
-    </div>
-  )
+  render(){
+
+    return(
+      <div>
+        <h1>Dashboard Container</h1>
+        <UserInfo currentUser={this.props.currentUser}/>
+        <ProjectInfo currentProject={this.props.currentProject} handleSelection={this.handleSelection}/>
+        <SequenceInfo selectedSequence={this.state.selectedSequence}/>
+      </div>
+    )
+  }
 }
 
 export default DashboardContainer;
