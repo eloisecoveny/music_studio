@@ -20,8 +20,9 @@ class ProjectSelector extends React.Component {
   handleSubmit(e){
     const project = {
       name: this.state.newProjectName,
-      user: "localhost:8080/users/" + this.props.currentUser.id
+      user: "http://localhost:8080/api/users/" + this.props.currentUser.id
     }
+    console.log(project);
     const request = new Request();
     request.post("/api/projects", project)
     .then(() => {
