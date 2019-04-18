@@ -1,12 +1,14 @@
 import React from "react";
-import SequencePlayer
+import SequencePlayer from "./SequencePlayer";
 
 const ProjectInfo = (props) => {
 
-
-  const sequences = this.props.currentProject.sequences.map((sequence, index) => {
-    return <li value={sequence} key={index}>{sequence.name} : <SequencePlayer audio={sequence.data}></SequencePlayer></li>
-  })
+  const sequences = [];
+  if(props.currentProject){
+    props.currentProject.sequences.map((sequence, index) => {
+      sequences.push(<li value={sequence} key={index}>{sequence.name} : <SequencePlayer audio={sequence.data}></SequencePlayer></li>)
+    })
+  }
 
 
   return(

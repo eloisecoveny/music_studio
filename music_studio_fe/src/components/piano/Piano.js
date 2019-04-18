@@ -122,7 +122,7 @@ class Piano extends React.Component {
     const request = new Request()
     const payload = {
       name: name,
-      project: "http://localhost:8080/api/users/" + this.props.currentProject.id,
+      project: "http://localhost:8080/api/projects/" + this.props.currentProject.id,
       user: "http://localhost:8080/api/users/" + this.props.currentUser.id,
       audio: this.state.audioData
     }

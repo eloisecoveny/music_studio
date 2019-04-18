@@ -51,7 +51,6 @@ class StudioContainer extends Component {
   }
 
   handleProjectSelection(project){
-    console.log(project);
     this.setState({ currentProject: project })
   }
 
@@ -69,7 +68,7 @@ class StudioContainer extends Component {
         } }/>
         <Route exact path="/studio" render={ (props) => {
         return <div><Piano currentUser={ this.state.currentUser } currentProject={ this.state.currentProject } sound="piano"></Piano>
-        <DashboardContainer currentUser={this.state.currentUser} currentProject></DashboardContainer></div>
+        <DashboardContainer currentUser={this.state.currentUser} currentProject={this.state.currentProject}></DashboardContainer></div>
         } }/>
         </Switch>
         </Router>
