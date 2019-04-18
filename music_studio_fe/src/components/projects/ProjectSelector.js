@@ -38,6 +38,7 @@ class ProjectSelector extends React.Component {
     const request = new Request();
     request.get("/api/projects/project/" + project.name)
     .then((data) => {
+      console.log(data[0]);
       this.props.handleProjectSelection(data[0])
     })
   }

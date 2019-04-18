@@ -20,7 +20,7 @@ public class Sequence {
     @JoinColumn(name = "project_id", nullable = false)
     private Project project;
 
-    @JsonIgnoreProperties("sequences")
+    @JsonIgnoreProperties("user")
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
