@@ -69,7 +69,12 @@ class Piano extends React.Component {
 
   generateContext(){
     const audio = document.querySelector("audio")
-    const synth = new Tone.Synth();
+    const synth = new Tone.Synth({
+        "oscillator" : {
+          "type" : "sine4",
+          "modulationFrequency" : 0.4
+        }
+    });
     const context = Tone.context;
     const destination = context.createMediaStreamDestination();
     const recorder = new MediaRecorder(destination.stream)
@@ -84,7 +89,7 @@ class Piano extends React.Component {
 
       const chunks = [];
 
-      this.state.synth.triggerAttackRelease(note)
+      this.state.synth.triggerAttack(note)
 
 
 
@@ -138,10 +143,10 @@ class Piano extends React.Component {
 
 
 
-    const notes = [{note: "A4", input: "a"}, {note: "A7", input: "1"}, {note: "B4", input: "s"}, {note: "C4", input: "q"}, {note: "C7", input: "2"}, {note: "D4", input: "w"}, {note: "D7", input: "3"}, {note: "E4", input: "e"}, {note: "F4", input: "r"}, {note: "F7", input: "4"}, {note: "G4", input: "t"}, {note: "G7", input: "5"}, {note: "A5", input: "y"}, {note: "A8", input: "6"}, {note: "B5", input: "u"}, {note: "C5", input: "i"}, {note: "C8", input: "7"}, {note: "D5", input: "o"}, {note: "D8", input: "8"}, {note: "E5", input: "p"}, {note: "F8", input: "9"}, {note: "F5", input: "k"}, {note: "G8", input: "0"}, {note: "G5", input: "l"}]
+    const notes = [{note: "A4", input: "a"}, {note: "A#4", input: "1"}, {note: "B4", input: "s"}, {note: "C4", input: "q"}, {note: "C#4", input: "2"}, {note: "D4", input: "w"}, {note: "D#4", input: "3"}, {note: "E4", input: "e"}, {note: "F4", input: "r"}, {note: "F#4", input: "4"}, {note: "G4", input: "t"}, {note: "G#4", input: "5"}, {note: "A4", input: "y"}, {note: "A#4", input: "6"}, {note: "B4", input: "u"}, {note: "C5", input: "i"}, {note: "C#4", input: "7"}, {note: "D5", input: "o"}, {note: "D#5", input: "8"}, {note: "E5", input: "p"}, {note: "F#5", input: "9"}, {note: "F5", input: "k"}, {note: "G#5", input: "0"}, {note: "G5", input: "l"}]
 
     const keys = notes.map((note, index) => {
-       return <PianoKey handleClickPlayNote={ this.clickHandlePlayNote } note={ note.note } input={ note.input } key={ index }></PianoKey>
+      return <PianoKey handleClickPlayNote={ this.clickHandlePlayNote } note={ note.note } input={ note.input } key={ index }></PianoKey>
     })
 
     return (
