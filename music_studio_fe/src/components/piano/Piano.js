@@ -25,6 +25,7 @@ class Piano extends React.Component {
     this.saveAudio = this.saveAudio.bind(this)
     this.generateContext = this.generateContext.bind(this)
     this.clickHandlePlayNote = this.clickHandlePlayNote.bind(this)
+    this.activatePiano = this.activatePiano.bind(this)
   }
 
   componentDidMount(){
@@ -83,7 +84,7 @@ class Piano extends React.Component {
 
 
   handlePlayNote(note){
-    if (this.state.recorder){
+    if (this.state.recorder && this.props.pianoActive){
       this.state.synth.connect(this.state.destination)
       this.state.synth.toMaster();
 
@@ -138,10 +139,12 @@ class Piano extends React.Component {
     }
   }
 
+  activatePiano(){
+    this.props.activatePiano()
+  }
+
 
   render(){
-
-
 
     const notes = [{note: "A4", input: "a", class: "A"}, {note: "A#4", input: "1", class: "B"}, {note: "B4", input: "s", class: "C"}, {note: "C4", input: "q", class: "D"}, {note: "C#4", input: "2", class: "E"}, {note: "D4", input: "w", class: "F"}, {note: "D#4", input: "3", class: "G"}, {note: "E4", input: "e", class: "H"}, {note: "F4", input: "r", class: "I"}, {note: "F#4", input: "4", class: "J"}, {note: "G4", input: "t", class: "K"}, {note: "G#4", input: "5", class: "L"}, {note: "A4", input: "y", class: "M"}, {note: "A#4", input: "6", class: "N"}, {note: "B4", input: "u", class: "O"}, {note: "C5", input: "i", class: "P"}, {note: "C#5", input: "7", class: "Q"}, {note: "D5", input: "o", class: "R"}, {note: "D#5", input: "8", class: "S"}, {note: "E5", input: "p", class: "T"}, {note: "F#5", input: "9", class: "U"}, {note: "F5", input: "k", class: "V"}, {note: "G#5", input: "0", class: "W"}, {note: "G5", input: "l", class: "X"}]
 
@@ -152,8 +155,8 @@ class Piano extends React.Component {
     return (
       <div className="piano">
         <h1>I am piano!</h1>
-        <RecordingTools startRecord={ this.startRecord } stopRecord={ this.stopRecord } saveAudio={ this.saveAudio }></RecordingTools>
-        <div className= "KeyContainer">{ keys } </div>
+        <RecordingTools deactivatePiano={ this.props.deactivatePiano } startRecord={ this.startRecord } stopRecord={ this.stopRecord } saveAudio={ this.saveAudio }></RecordingTools>
+        <div onClick={ this.activatePiano } className= "KeyContainer">{ keys } </div>
         <audio id="main-audio"></audio>
       </div>
     )

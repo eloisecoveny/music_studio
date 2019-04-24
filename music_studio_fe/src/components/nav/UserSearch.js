@@ -9,6 +9,7 @@ class UserSearch extends Component {
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSelected = this.handleSelected.bind(this)
+    this.handleClick = this.handleClick.bind(this)
   }
 
   componentDidMount(){
@@ -19,7 +20,10 @@ class UserSearch extends Component {
     this.setState({
       searchString: this.refs.search.value
     });
+  }
 
+  handleClick(){
+    this.props.deactivatePiano()
   }
 
   handleSelected(user){
@@ -48,6 +52,7 @@ class UserSearch extends Component {
             value={this.state.searchString}
             ref="search"
             onChange={this.handleChange}
+            onClick={ this.handleClick }
             placeholder="type name here"
           />
           <ul>

@@ -15,7 +15,7 @@ const NavBar = (props) => {
         </li>
       </ul>
 
-      <UserSearch selectedUser={ props.selectedUser }users={ props.users }></UserSearch>
+      <UserSearch deactivatePiano={ props.deactivatePiano } selectedUser={ props.selectedUser }users={ props.users }></UserSearch>
 
       <select id="">
         <option value="tag">Project Tag</option>

@@ -15,12 +15,15 @@ class StudioContainer extends Component {
       currentUser: null,
       projects: [],
       currentProject: null,
-      foundUser: null
+      foundUser: null,
+      pianoActive: false
     }
     this.handleSelectedUser = this.handleSelectedUser.bind(this)
     this.handleUserLogin = this.handleUserLogin.bind(this)
     this.handleNewUser = this.handleNewUser.bind(this)
     this.handleProjectSelection = this.handleProjectSelection.bind(this)
+    this.setPianoActive = this.setPianoActive.bind(this)
+    this.deactivatePiano = this.deactivatePiano.bind(this)
 
   }
 
@@ -54,11 +57,20 @@ class StudioContainer extends Component {
     this.setState({ currentProject: project })
   }
 
+  setPianoActive(){
+    this.setState({ pianoActive: true })
+  }
+
+  deactivatePiano(){
+    console.log("got here");
+    this.setState({ pianoActive: false })
+  }
+
   render(){
     return (
       <div>
         <Router>
-        <NavBar selectedUser={ this.handleSelectedUser } users={ this.state.users }/>
+        <NavBar deactivatePiano={ this.deactivatePiano } selectedUser={ this.handleSelectedUser } users={ this.state.users }/>
         <Switch>
         <Route exact path="/login" render={ (props) => {
         return <UserLogIn currentUser={ this.state.currentUser } handleUserLogin={ this.handleUserLogin } handleNewUser={ this.handleNewUser }></UserLogIn>
@@ -67,7 +79,7 @@ class StudioContainer extends Component {
         return <ProjectSelector currentUser={this.state.currentUser} handleProjectSelection={this.handleProjectSelection}/>
         } }/>
         <Route exact path="/studio" render={ (props) => {
-        return <div><Piano currentUser={ this.state.currentUser } currentProject={ this.state.currentProject } sound="piano"></Piano>
+        return <div><Piano pianoActive={ this.state.pianoActive } activatePiano={ this.setPianoActive } deactivatePiano={ this.deactivatePiano } currentUser={ this.state.currentUser } currentProject={ this.state.currentProject } sound="piano"></Piano>
         <DashboardContainer currentUser={this.state.currentUser} currentProject={this.state.currentProject}></DashboardContainer></div>
         } }/>
         </Switch>
